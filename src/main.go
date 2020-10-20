@@ -14,5 +14,6 @@ func init() {
 func main() {
 	app := gin.Default()
 	router.Router(app)
+	config.Close()
 	app.Run(":3000")
 }
