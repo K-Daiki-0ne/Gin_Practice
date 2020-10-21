@@ -2,8 +2,6 @@ package config
 
 import (
 	"fmt"
-	"log"
-	"os"
 
 	"github.com/jinzhu/gorm"
 
@@ -11,41 +9,55 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-var (
+// Book book type
+type Book struct {
+	gorm.Model
+	Title  string `json:"title"`
+	Author string `json:"author"`
+	Rating string `json:"rating"`
+}
+
+// User book type
+type User struct {
+	UserID   uint   `gorm:"primary_key;auto_increment:false"`
+	UserName string `gorm:"size:255"`
+}
+
+const (
 	// Dialect Use DataBase name
 	Dialect = "mysql"
 
 	// DBUser MySQL's user name
-	DBUser = os.Getenv("DB_USER")
+	DBUser = "user1"
 
 	// DBPass MySQL's user password
-	DBPass = os.Getenv("DB_PASS")
+	DBPass = "Password_01"
 
 	// DBProt MySQL protocol
-	DBProt = os.Getenv("DB_PROT")
+	DBProt = "tcp(localhost:3306)"
 
 	// DBName MySQL table name
-	DBName = os.Getenv("DB_NAME")
+	DBName = "crud"
 )
 
 // Connect MySQL connect function
 func Connect() *gorm.DB {
-	connectTemplate := "%s:%s@%s/%s"
-	connect := fmt.Sprintf(connectTemplate, DBUser, DBPass, DBProt, DBName)
+	connect := Parser(DBUser, DBPass, DBProt, DBName)
+
 	db, err := gorm.Open(Dialect, connect)
 
 	if err != nil {
-		log.Println(err.Error())
+		fmt.Println("DB connect ...NO")
+	} else {
+		db.AutoMigrate(&Book{})
+		fmt.Println("DB connect ...OK")
 	}
-
-	fmt.Println("DB connect ...OK")
-
 	return db
 }
 
 // Close Database close function
 func Close() {
 	db := Connect()
-	defer db.Close()
+	db.Close()
 	fmt.Println("DB close ...OK")
 }
