@@ -22,7 +22,10 @@ func GetBook(c *gin.Context) {
 
 // NewBook post new book controller
 func NewBook(c *gin.Context) {
-	newBook := models.New()
+	title := c.Param("title")
+	author := c.Param("author")
+	rating := c.Param("rating")
+	newBook := models.New(title, author, rating)
 	c.JSON(http.StatusOK, newBook)
 }
 

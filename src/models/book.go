@@ -31,12 +31,12 @@ func Single(id string) Book {
 }
 
 // New create new store book
-func New() Book {
+func New(title string, author string, rating string) Book {
 	db := database.DBConnect
 	var newBook Book
-	newBook.Title = "1984"
-	newBook.Author = "George Owell"
-	newBook.Rating = "10"
+	newBook.Title = title
+	newBook.Author = author
+	newBook.Rating = rating
 	db.Create(&newBook)
 
 	return newBook
