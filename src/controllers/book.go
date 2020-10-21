@@ -15,7 +15,7 @@ func GetAllBooks(c *gin.Context) {
 
 // GetBook single book get controller
 func GetBook(c *gin.Context) {
-	book := "Single Book"
+	book := c.Param("id")
 	c.JSON(http.StatusOK, book)
 }
 
