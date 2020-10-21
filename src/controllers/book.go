@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"0ne/src/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -8,7 +9,7 @@ import (
 
 // GetAllBooks all book get controller
 func GetAllBooks(c *gin.Context) {
-	allBooks := "All books"
+	allBooks := models.All()
 	c.JSON(http.StatusOK, allBooks)
 }
 
