@@ -17,12 +17,6 @@ type Book struct {
 	Rating string `json:"rating"`
 }
 
-// User book type
-type User struct {
-	UserID   uint   `gorm:"primary_key;auto_increment:false"`
-	UserName string `gorm:"size:255"`
-}
-
 const (
 	// Dialect Use DataBase name
 	Dialect = "mysql"
