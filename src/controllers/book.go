@@ -15,13 +15,14 @@ func GetAllBooks(c *gin.Context) {
 
 // GetBook single book get controller
 func GetBook(c *gin.Context) {
-	book := c.Param("id")
-	c.JSON(http.StatusOK, book)
+	id := c.Param("id")
+	singleBook := models.Single(id)
+	c.JSON(http.StatusOK, singleBook)
 }
 
 // NewBook post new book controller
 func NewBook(c *gin.Context) {
-	newBook := "New Book"
+	newBook := models.New()
 	c.JSON(http.StatusOK, newBook)
 }
 

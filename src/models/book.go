@@ -21,3 +21,23 @@ func All() []Book {
 	db.Find(&books)
 	return books
 }
+
+// Single get single book
+func Single(id string) Book {
+	db := database.DBConnect
+	var book Book
+	db.Find(&book, id)
+	return book
+}
+
+// New create new store book
+func New() Book {
+	db := database.DBConnect
+	var newBook Book
+	newBook.Title = "1984"
+	newBook.Author = "George Owell"
+	newBook.Rating = "10"
+	db.Create(&newBook)
+
+	return newBook
+}
