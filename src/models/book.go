@@ -17,6 +17,7 @@ type Book struct {
 // All get all Book
 func All() []Book {
 	db := database.DBConnect
+	// db := config.Connect()
 	var books []Book
 	db.Find(&books)
 	return books
