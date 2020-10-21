@@ -28,6 +28,7 @@ func NewBook(c *gin.Context) {
 
 // DeleteBook delete single book controller
 func DeleteBook(c *gin.Context) {
-	deleteBook := "Delete Book"
+	id := c.Param("id")
+	deleteBook := models.Delete(id)
 	c.JSON(http.StatusOK, deleteBook)
 }

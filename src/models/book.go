@@ -41,3 +41,17 @@ func New() Book {
 
 	return newBook
 }
+
+// Delete delete book function
+func Delete(id string) string {
+	db := database.DBConnect
+	var deleteBook Book
+	var message string
+	db.First(&deleteBook, id)
+	if deleteBook.Title == "" {
+		message = "No book found with given ID"
+	} else {
+		message = "Book Successfully deleted"
+	}
+	return message
+}
